@@ -1,16 +1,15 @@
 import importlib
+import sys
 
 
 def remove_item(valid_nodes, i, j):
-    r = dict(valid_nodes)
-    del r[(i, j)]
-    return r
+    print('removendo ', (i, j))
+    if (i, j) in valid_nodes:
+        del valid_nodes[(i, j)]
 
 
 def del_diagonal_v(valid_nodes, i, j):
     try:
-        print('removendo: ', i-1, j)
-        print('removendo: ', i+1, j)
         remove_item(valid_nodes, i-1, j)
         remove_item(valid_nodes, i+1, j)
     except KeyError:
@@ -19,8 +18,6 @@ def del_diagonal_v(valid_nodes, i, j):
 
 def del_diagonal_h(valid_nodes, i, j):
     try:
-        print('removendo: ', i, j-1)
-        print('removendo: ', i, j+1)
         remove_item(valid_nodes, i, j-1)
         remove_item(valid_nodes, i, j+1)
     except KeyError:
@@ -60,4 +57,3 @@ def cell_free(i, j):
 
 BuildMap = importlib.import_module('BuildMap')
 hash_map = BuildMap.build_map()
-print(valid_paths(8, 7))

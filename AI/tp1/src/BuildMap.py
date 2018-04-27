@@ -1,5 +1,8 @@
+import sys
+
+
 def build_map():
-    my_map = open("test_map_1.map", "rb")
+    my_map = open(sys.argv[1], "rb")
     my_map.readline()
     my_map.read(7);
     line_num = int(my_map.readline())
