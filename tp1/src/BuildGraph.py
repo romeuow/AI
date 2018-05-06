@@ -1,59 +1,64 @@
-import importlib
-import sys
+from Node import NodeClass
 
+class BuildGraphClass:
 
-def remove_item(valid_nodes, i, j):
-    print('removendo ', (i, j))
-    if (i, j) in valid_nodes:
-        del valid_nodes[(i, j)]
+    @staticmethod
+    def expand(node, hash_map):
 
+        valid_nodes = []
+        
+        try:
+            if hash_map[(node.x, node.y - 1)] == '.' and (node.parent is None or ((node.x, node.y - 1) != node.parent.position)):
+                valid_nodes.append(NodeClass(node.x, node.y - 1, node.sum_cost + 1, node.depth + 1, node))
+                if hash_map[(node.x - 1, node.y - 1)] == '.'  and (node.parent is None or ((node.x - 1, node.y - 1) != node.parent.position)):
+                    valid_nodes.append(NodeClass(node.x - 1, node.y - 1, node.sum_cost + 1.5, node.depth + 1, node))
+        except KeyError:
+            pass
+        except IndexError:
+            pass
 
-def del_diagonal_v(valid_nodes, i, j):
-    try:
-        remove_item(valid_nodes, i-1, j)
-        remove_item(valid_nodes, i+1, j)
-    except KeyError:
-        pass
+        try:
+            if hash_map[(node.x - 1, node.y)] == '.' and (node.parent is None or ((node.x - 1, node.y) != node.parent.position)):
+                valid_nodes.append(NodeClass(node.x - 1, node.y, node.sum_cost + 1, node.depth + 1, node))
+                if hash_map[(node.x - 1, node.y + 1)] == '.' and (node.parent is None or ((node.x - 1, node.y + 1) != node.parent.position)):
+                    valid_nodes.append(NodeClass(node.x - 1, node.y + 1, node.sum_cost + 1.5, node.depth + 1, node))
+            elif hash_map[(node.x - 1, node.y)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
+                valid_nodes.pop()
+        except KeyError:
+            pass
+        except IndexError:
+            pass
 
+        try:
+            if hash_map[(node.x, node.y + 1)] == '.' and (node.parent is None or ((node.x, node.y + 1) != node.parent.position)):
+                valid_nodes.append(NodeClass(node.x, node.y + 1, node.sum_cost + 1, node.depth + 1, node))
+                if hash_map[(node.x + 1, node.y + 1)] == '.' and (node.parent is None or ((node.x + 1, node.y + 1) != node.parent.position)):
+                    valid_nodes.append(NodeClass(node.x + 1, node.y + 1, node.sum_cost + 1.5, node.depth + 1, node))
+            elif hash_map[(node.x, node.y + 1)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
+                valid_nodes.pop()
+        except KeyError:
+            pass
+        except IndexError:
+            pass
 
-def del_diagonal_h(valid_nodes, i, j):
-    try:
-        remove_item(valid_nodes, i, j-1)
-        remove_item(valid_nodes, i, j+1)
-    except KeyError:
-        pass
+        try:
+            if hash_map[(node.x + 1, node.y)] == '.' and (node.parent is None or ((node.x + 1, node.y) != node.parent.position)):
+                valid_nodes.append(NodeClass(node.x + 1, node.y, node.sum_cost + 1, node.depth + 1, node))
+                if hash_map[(node.x + 1, node.y - 1)] == '.' and (node.parent is None or ((node.x + 1, node.y - 1) != node.parent.position)):
+                    valid_nodes.append(NodeClass(node.x + 1, node.y - 1, node.sum_cost + 1.5, node.depth + 1, node))
+            elif hash_map[(node.x + 1, node.y)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
+                valid_nodes.pop()
+        except KeyError:
+            pass
+        except IndexError:
+            pass
 
+        try:
+            if hash_map[(node.x, node.y-1)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
+                valid_nodes.pop()
+        except KeyError:
+            pass
+        except IndexError:
+            pass
 
-def valid_paths(i, j):
-    if not cell_free(i, j):
-        return []
-    valid_nodes = {}
-    for k in range(i-1, i+2):
-        for l in range(j-1, j+2):
-            if cell_free(k, l) and not (k == i and l == j):
-                valid_nodes.update({(k, l): (i, j)})
-    print(valid_nodes)
-    if not cell_free(i-1, j):
-        del_diagonal_h(valid_nodes, i-1, j)
-    if not cell_free(i+1, j):
-        del_diagonal_h(valid_nodes, i+1, j)
-    if not cell_free(i, j-1):
-        del_diagonal_v(valid_nodes, i, j-1)
-    if not cell_free(i, j+1):
-        del_diagonal_v(valid_nodes, i, j+1)
-
-    return valid_nodes
-
-
-def cell_free(i, j):
-    try:
-        if hash_map[(i, j)] == '.':
-            return True
-        else:
-            return False
-    except KeyError:
-            return False
-
-
-BuildMap = importlib.import_module('BuildMap')
-hash_map = BuildMap.build_map()
+        return valid_nodes
