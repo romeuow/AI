@@ -3,62 +3,47 @@ from Node import NodeClass
 class BuildGraphClass:
 
     @staticmethod
-    def expand(node, hash_map):
+    def expand(node, hash_map, frontier, explored):
 
-        valid_nodes = []
-        
-        try:
-            if hash_map[(node.x, node.y - 1)] == '.' and (node.parent is None or ((node.x, node.y - 1) != node.parent.position)):
-                valid_nodes.append(NodeClass(node.x, node.y - 1, node.sum_cost + 1, node.depth + 1, node))
-                if hash_map[(node.x - 1, node.y - 1)] == '.'  and (node.parent is None or ((node.x - 1, node.y - 1) != node.parent.position)):
-                    valid_nodes.append(NodeClass(node.x - 1, node.y - 1, node.sum_cost + 1.5, node.depth + 1, node))
-        except KeyError:
-            pass
-        except IndexError:
-            pass
+        valid_nodes = {}
+        valid_nodes_aux = {}
+        for i in range(node.x - 1, node.x + 2):
+            for j in range(node.y - 1, node.y + 2):
+                try:
+                    hash_map[(i,j)] == ('.' or '@')
+                    # print((i,j), node.position)
+                    # print(node.parent )
+                    # print((i,j) not in explored)
+                    # print((i,j) not in frontier)
+                    # print("\n")                    
+                    if ((i,j) != node.position) and (node.parent is None or (i,j) != node.parent.position) and ((i,j) not in explored) and ((i,j) not in frontier):
+                        valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + 1, node.depth + 1, node)})
+                except KeyError:
+                    pass
+                except IndexError:
+                    pass
+                        
+        # print(valid_nodes_aux)
+        valid_nodes = valid_nodes_aux.copy()
+        for item in valid_nodes_aux:
+            try:
+                # print("Trabalhando no ", item, "\nHash = ", hash_map[item])
+                if hash_map[item] == '@':                
+                    del valid_nodes[item]
+                    if item[0] == node.x:
+                        del valid_nodes[(item[0], item[1] - 1)]
+                        del valid_nodes[(item[0], item[1] + 1)]
 
-        try:
-            if hash_map[(node.x - 1, node.y)] == '.' and (node.parent is None or ((node.x - 1, node.y) != node.parent.position)):
-                valid_nodes.append(NodeClass(node.x - 1, node.y, node.sum_cost + 1, node.depth + 1, node))
-                if hash_map[(node.x - 1, node.y + 1)] == '.' and (node.parent is None or ((node.x - 1, node.y + 1) != node.parent.position)):
-                    valid_nodes.append(NodeClass(node.x - 1, node.y + 1, node.sum_cost + 1.5, node.depth + 1, node))
-            elif hash_map[(node.x - 1, node.y)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
-                valid_nodes.pop()
-        except KeyError:
-            pass
-        except IndexError:
-            pass
+                    elif item[1] == node.y:
+                        del valid_nodes[(item[0] - 1, item[1])]
+                        del valid_nodes[(item[0] + 1, item[1])]
+                    
+                else:
+                    if (item[0] != node.x) and (item[1] != node.y):
+                        valid_nodes[item].sum_cost += 0.5
+            except KeyError:
+                pass
+            except IndexError:
+                pass
 
-        try:
-            if hash_map[(node.x, node.y + 1)] == '.' and (node.parent is None or ((node.x, node.y + 1) != node.parent.position)):
-                valid_nodes.append(NodeClass(node.x, node.y + 1, node.sum_cost + 1, node.depth + 1, node))
-                if hash_map[(node.x + 1, node.y + 1)] == '.' and (node.parent is None or ((node.x + 1, node.y + 1) != node.parent.position)):
-                    valid_nodes.append(NodeClass(node.x + 1, node.y + 1, node.sum_cost + 1.5, node.depth + 1, node))
-            elif hash_map[(node.x, node.y + 1)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
-                valid_nodes.pop()
-        except KeyError:
-            pass
-        except IndexError:
-            pass
-
-        try:
-            if hash_map[(node.x + 1, node.y)] == '.' and (node.parent is None or ((node.x + 1, node.y) != node.parent.position)):
-                valid_nodes.append(NodeClass(node.x + 1, node.y, node.sum_cost + 1, node.depth + 1, node))
-                if hash_map[(node.x + 1, node.y - 1)] == '.' and (node.parent is None or ((node.x + 1, node.y - 1) != node.parent.position)):
-                    valid_nodes.append(NodeClass(node.x + 1, node.y - 1, node.sum_cost + 1.5, node.depth + 1, node))
-            elif hash_map[(node.x + 1, node.y)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
-                valid_nodes.pop()
-        except KeyError:
-            pass
-        except IndexError:
-            pass
-
-        try:
-            if hash_map[(node.x, node.y-1)] == '@' and not (valid_nodes[-1].x == node.x or valid_nodes[-1].y == node.y):
-                valid_nodes.pop()
-        except KeyError:
-            pass
-        except IndexError:
-            pass
-
-        return valid_nodes
+        return list(valid_nodes.values())
