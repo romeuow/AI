@@ -16,7 +16,7 @@ class BuildGraphClass:
                     # print((i,j) not in explored)
                     # print((i,j) not in frontier)
                     # print("\n")                    
-                    if ((i,j) != node.position) and (node.parent is None or (i,j) != node.parent.position) and ((i,j) not in explored) and ((i,j) not in frontier):
+                    if ((i,j) != node.position) and (node.parent is None or (i,j) != node.parent.position) and ((i,j) not in explored) and (not frontier.contains((i,j))):
                         valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + 1, node.depth + 1, node)})
                 except KeyError:
                     pass

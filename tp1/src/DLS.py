@@ -1,5 +1,5 @@
 from BuildGraph import BuildGraphClass
-import heapq as h
+from Queue import QueuePriorityClass
 import sys
 
 
@@ -16,23 +16,21 @@ class DLSClass:
     def __dlsRun__(self, problem, limit):
         
         buildGraphClass = BuildGraphClass()
+        frontier = QueuePriorityClass()
 
         explored = {}
-        frontier = {problem.initial_state.position: problem.initial_state}
-
+        frontier.add_item(problem.initial_state)
         if problem.initial_state.position == problem.goal_state.position:
             return problem.initial_state, None
         if limit == 0:
             return 'cutoff', None 
 
         cutoff_ocurred = False
-        while frontier:
-            item = frontier.popitem()
-            node = item[1]
-            
-            print("Chegou no fundo??  ", limit == node.depth)
+        while frontier.is_empty():
+            node = frontier.pop_item()
+            # print("Chegou no fundo??  ", limit == node.depth)
             if node.depth == limit:
-                print(node.position, "Solução??  ", node.position == problem.goal_state.position)
+                # print(node.position, "Solução??  ", node.position == problem.goal_state.position)
                 cutoff_ocurred = True
                 if node.position == problem.goal_state.position:
                     explored.update({node.position: node})
@@ -40,12 +38,12 @@ class DLSClass:
                 
             else:
                 explored.update({node.position: node})
-                print("Explorados: ", str(explored.keys()))
+                # print("Explorados: ", str(explored.keys()))
                 childs = buildGraphClass.expand(node, problem.map_problem, frontier, explored)
-                print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
+                # print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
                 for child in childs:
-                    frontier.update({child.position: child})
-                print("Fronteira: ", frontier.keys())
+                    frontier.add_item(child)
+                # print("Fronteira: ", frontier.__str__())
                 
         if cutoff_ocurred:
             return 'cutoff', None

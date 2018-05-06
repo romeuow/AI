@@ -13,4 +13,5 @@ class NodeClass:
 
     def __str__(self):
         return "<" + str(self.x) + "," + str(self.y) + ","+ str(self.sum_cost) + "> "
-   		#return "\n\nPosition: " + str(self.position) + "\nSum cost: " + str(self.sum_cost) + "\nParent: " + str(self.parent.position) + "\nDepth: " + str(self.depth)
+   		# return "\n\nPosition: " + str(self.position) + "\nSum cost: " + str(self.sum_cost) + "\nParent: " + str(self.parent.position) + "\nDepth: " + str(self.depth)
+        # return str(self.position) + " "

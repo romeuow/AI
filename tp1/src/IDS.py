@@ -12,7 +12,7 @@ class IDSClass:
         dlsClass = DLSClass()
         depth = 0
         while True:
-            print("\nIteração: ", depth)
+            # print("\nIteração: ", depth)
             result, explored = dlsClass.dls(problem, depth)
             if result != 'cutoff':
                 return result, explored
@@ -30,7 +30,7 @@ class IDSClass:
             exit(0)
         result, explored = __ids__(problem)
         print(result)
-        if explored is not None:
-            for item in explored:
-                print(explored[item], end='')
+        # if explored is not None:
+        #     for item in explored:
+        #         print(explored[item], end='')
         print("\n\nElapsed time:", time.time()-start_time)
