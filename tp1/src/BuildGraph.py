@@ -31,12 +31,12 @@ class BuildGraphClass:
                 if hash_map[item] == '@':                
                     del valid_nodes[item]
                     if item[0] == node.x:
-                        del valid_nodes[(item[0], item[1] - 1)]
-                        del valid_nodes[(item[0], item[1] + 1)]
+                        del valid_nodes[(item[0] + 1, item[1])]
+                        del valid_nodes[(item[0] - 1, item[1])]
 
                     elif item[1] == node.y:
-                        del valid_nodes[(item[0] - 1, item[1])]
-                        del valid_nodes[(item[0] + 1, item[1])]
+                        del valid_nodes[(item[0], item[1] + 1)]
+                        del valid_nodes[(item[0], item[1] - 1)]
                     
                 else:
                     if (item[0] != node.x) and (item[1] != node.y):

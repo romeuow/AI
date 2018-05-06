@@ -13,38 +13,46 @@ class DLSClass:
     #             out.write(str(mapa[(i,j)]))
     #     out.close()
 
-    def __dlsRun__(self, node, problem, limit):
+    def __dlsRun__(self, problem, limit):
         
         buildGraphClass = BuildGraphClass()
+
         explored = {}
-        frontier = {}
+        frontier = {problem.initial_state.position: problem.initial_state}
 
-        while limit:
-            explored.update({node.position: node})
-            # print("Explorados: ", str(explored.keys()))
-            childs = buildGraphClass.expand(node, problem.map_problem, frontier, explored)
-            # print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
-            for child in childs:
-                frontier.update({child.position: child})
-            # print("Fronteira: ", frontier.keys())
-            if not frontier:
-                return 'failure', None
-            item = frontier.popitem()
-            node = item[1]
-            limit -= 1
-            # print(node.position, "Solução??  ", node.position == problem.goal_state.position)
-            if node.position == problem.goal_state.position:
-                explored.update({node.position: node})
-                return node,explored
-            # print(type(item[1]))
-            # print("\n")
-        # print("Chegou no fundo??  ", limit == 0)
-        return 'cutoff', None
-
-    def dls(self, problem, limit):
-        # self.__verificar__(problem.map_problem)
         if problem.initial_state.position == problem.goal_state.position:
             return problem.initial_state, None
         if limit == 0:
-            return 'cutoff', None        
-        return self.__dlsRun__(problem.initial_state, problem, limit)
+            return 'cutoff', None 
+
+        cutoff_ocurred = False
+        while frontier:
+            item = frontier.popitem()
+            node = item[1]
+            
+            print("Chegou no fundo??  ", limit == node.depth)
+            if node.depth == limit:
+                print(node.position, "Solução??  ", node.position == problem.goal_state.position)
+                cutoff_ocurred = True
+                if node.position == problem.goal_state.position:
+                    explored.update({node.position: node})
+                    return node, explored
+                
+            else:
+                explored.update({node.position: node})
+                print("Explorados: ", str(explored.keys()))
+                childs = buildGraphClass.expand(node, problem.map_problem, frontier, explored)
+                print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
+                for child in childs:
+                    frontier.update({child.position: child})
+                print("Fronteira: ", frontier.keys())
+                
+        if cutoff_ocurred:
+            return 'cutoff', None
+        else:
+            return 'failure', None
+
+    def dls(self, problem, limit):
+        # self.__verificar__(problem.map_problem)
+               
+        return self.__dlsRun__(problem, limit)
