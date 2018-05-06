@@ -2,23 +2,10 @@ from BuildGraph import BuildGraphClass
 import heapq as h
 import sys
 
-i = 0
 
 class DLSClass:
     sys.setrecursionlimit(20000)
-
-    i = 0
-
-    def increase_global(self):
-        global i
-        i += 1
-
-    def set_global_to0():
-        global i
-        i = 0
-    def print_global(self):
-        print(i)
-
+    
     # def __verificar__(self, mapa):
     #     out = open("mapaloco.map", "w")
     #     for i in range(0,3):
@@ -44,8 +31,7 @@ class DLSClass:
             if (node.position not in explored) and (node.position not in frontier):
                 explored.update({node.position: node})
                 childs = buildGraphClass.expand(node, problem.map_problem)
-                #self.print_global()
-                #self.increase_global()
+
                 for child in childs:
                     frontier.update({child.position: child})
             elif not frontier:
