@@ -1,12 +1,13 @@
 class NodeClass:
 
-    def __init__(self, i, j, sum_cost, depth, parent):
+    def __init__(self, i, j, sum_cost, depth, parent, algorithm):
         self.x = int(i)
         self.y = int(j)
         self.position = (int(i), int(j))
         self.sum_cost = float(sum_cost)
         self.parent = parent
         self.depth = int(depth)
+        self.type = algorithm
 
     def __repr__(self):
     	return str(self.position)

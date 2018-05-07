@@ -35,7 +35,7 @@ class SearchClass:
             else:
                 explored.update({node.position: node})
                 # print("Explorados: ", str(explored.keys()))
-                childs = buildGraphClass.expand(node, problem.map_problem, frontier, explored)
+                childs = buildGraphClass.expand(node, problem.map_problem, frontier, explored, problem.goal_state)
                 # print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
                 for children in childs:
                     if not frontier.contains(children.position):
