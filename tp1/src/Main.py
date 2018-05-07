@@ -20,14 +20,17 @@ class MainClass:
 		except KeyError:
 			print('failure')
 			exit(0)
+		
+		search = SearchClass()
 		if sys.argv[1] == 'ids':
 			ids = IDSClass()
 			result, explored = ids.ids(problem)
 			print(result)
 		elif sys.argv[1] == 'ucs':
-			search = SearchClass()
-			result, explored = search.search(problem)
+			result, explored = search.search(problem, math.inf)
 			print(result)
+		elif sys.argv[1] == 'bfs':
+			result, explored = search.search(problem, math.inf)
 		# if explored is not None:
 		#     for item in explored:
 		#         print(explored[item], end='')

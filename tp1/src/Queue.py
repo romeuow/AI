@@ -34,6 +34,9 @@ class QueuePriorityClass:
 	def is_empty(self):
 		return self.heap
 
+	def reorder(self):
+		return h.heapify(self.heap)
+
 	def __repr__(self):
 		return str(self.heap[0][2])
 
