@@ -3,6 +3,7 @@ import sys
 import time
 import math
 from IDS import IDSClass
+from Search import SearchClass
 from Problem import ProblemClass
 from BuildMap import BuildMapClass
 from Node import NodeClass
@@ -19,9 +20,13 @@ class MainClass:
 		except KeyError:
 			print('failure')
 			exit(0)
-		if(sys.argv[1] == 'ids'):
+		if sys.argv[1] == 'ids':
 			ids = IDSClass()
 			result, explored = ids.ids(problem)
+			print(result)
+		elif sys.argv[1] == 'ucs':
+			search = SearchClass()
+			result, explored = search.search(problem)
 			print(result)
 		# if explored is not None:
 		#     for item in explored:

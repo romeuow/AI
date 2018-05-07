@@ -1,9 +1,3 @@
-import math
-import sys
-import time
-from BuildMap import BuildMapClass
-from Problem import ProblemClass
-from Node import NodeClass
 from DLS import DLSClass
 
 class IDSClass:
