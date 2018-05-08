@@ -11,7 +11,7 @@ from Node import NodeClass
 class MainClass:
 
 	def __problem__(algorithm):
-		return ProblemClass(BuildMapClass.build_map(), NodeClass(sys.argv[3], sys.argv[4], 0, 0, None, algorithm), NodeClass(sys.argv[5], sys.argv[6], 0, 0, math.inf, algorithm))
+		return ProblemClass(BuildMapClass.build_map(), NodeClass(sys.argv[3], sys.argv[4], 0, 0, None, algorithm, 0), NodeClass(sys.argv[5], sys.argv[6], 0, 0, math.inf, algorithm, 0))
     
 	if __name__ == '__main__':
 		start_time = time.time()

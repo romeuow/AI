@@ -11,7 +11,7 @@ class SearchClass:
         frontier = QueuePriorityClass()
 
         explored = {}
-        frontier.add_item(problem.initial_state)
+        frontier.add_item(problem.initial_state, problem.initial_state.cost)
         if problem.initial_state.position == problem.goal_state.position:
             return problem.initial_state, None
         if limit == 0:
@@ -39,16 +39,17 @@ class SearchClass:
                 # print ("Filhos de  " + str(node.position) + "      " + childs.__str__())
                 for children in childs:
                     if not frontier.contains(children.position):
-                        frontier.add_item(children, children.sum_cost)
+                        frontier.add_item(children, children.cost)
                     else:
                         if(ids):
                             continue
                         else:
                             item = frontier.entry_finder[children.position][2]
-                            if item.sum_cost >= children.sum_cost:
-                                item.sum_cost = children.sum_cost
-                                item.parent = node
-                                frontier.reorder()
+                            # print(item.cost, children.cost)
+                            if item.cost >= children.cost:
+                                frontier.add_item(children)
+                                # item = frontier.entry_finder[children.position][2]
+                                # print("mudou", item.cost)
 
                 # print("Fronteira: ", frontier.__str__())
                 

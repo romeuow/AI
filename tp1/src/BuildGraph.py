@@ -15,20 +15,21 @@ class BuildGraphClass:
             for j in range(node.y - 1, node.y + 2):
                 try:
                     hash_map[(i,j)] == ('.' or '@')
-                    # print((i,j), node.position)
-                    # print(node.parent )
-                    # print((i,j) not in explored)
-                    # print((i,j) not in frontier)
-                    # print("\n")                    
-                    if ((i,j) != node.position) and (node.parent is None or (i,j) != node.parent.position) and ((i,j) not in explored):
+                    if ((i,j) != node.position) and ((i,j) not in explored):
+                        g = c.g(node, i, j)
+                        current = NodeClass(i, j, g , node.depth + 1, node, node.type, 0)
+                        h = c.octile(current, goal)
                         if node.type == 'ids':
-                            valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + c.g(node, i, j) , node.depth + 1, node, 'ids')})
+                            valid_nodes_aux.update({(i,j): current})
                         elif node.type == 'ucs':
-                            valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + c.g(node, i, j) , node.depth + 1, node, 'ucs')})
+                            current.cost = g
+                            valid_nodes_aux.update({(i,j): current})
                         elif node.type == 'bfs':
-                            valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + c.manhattan(node, goal) , node.depth + 1, node, 'bfs')})
+                            current.cost = h
+                            valid_nodes_aux.update({(i,j): current})
                         elif node.type == 'astar':
-                            valid_nodes_aux.update({(i,j): NodeClass(i, j, node.sum_cost + c.g(node, i, j) + c.manhattan(node, goal) , node.depth + 1, node, 'astar')})
+                            current.cost = g + h
+                            valid_nodes_aux.update({(i,j): current})
                 except KeyError:
                     pass
                 except IndexError:
