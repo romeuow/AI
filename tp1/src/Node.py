@@ -14,8 +14,8 @@ class NodeClass:
     	return str(self.position)
 
     def __str__(self):
-        # return "<" + str(self.x) + "," + str(self.y) + ","+ str(self.sum_cost) + "> "
-   		return "\n\nPosition: " + str(self.position) + "\nSum cost: " + str(self.sum_cost) + "\nParent: " + str(self.parent.position) + "\nDepth: " + str(self.depth) + "\nCost: " + str(self.cost)
+        return "<" + str(self.x) + "," + str(self.y) + ","+ str(self.cost) + "> "
+   		# return "\n\nPosition: " + str(self.position) + "\nSum cost: " + str(self.sum_cost) + "\nParent: " + str(self.parent.position) + "\nDepth: " + str(self.depth) + "\nCost: " + str(self.cost)
         # return str(self.position) + " "
     
     def __eq__(self, other):

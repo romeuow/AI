@@ -32,10 +32,10 @@ class QueuePriorityClass:
 		return position in self.entry_finder
 
 	def is_empty(self):
-		return self.heap
+		return not self.heap
 
-	def reorder(self):
-		return h.heapify(self.heap)
+	# def sort(self):
+	# 	return h.heapify(self.heap)
 
 	def __repr__(self):
 		return str(self.heap[0][2])

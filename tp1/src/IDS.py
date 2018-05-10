@@ -8,6 +8,6 @@ class IDSClass:
         result = None
         while result is None:
             # print("\nIteração: ", depth)
-            result, explored = dlsClass.dls(problem, depth)
+            result, nodes_expanded, explored = dlsClass.dls(problem, depth)
             depth += 1
-        return result, explored
+        return result, nodes_expanded, explored

@@ -3,9 +3,9 @@ import sys
 
 class BuildMapClass:
     @staticmethod
-    def build_map():
+    def build_map(mapa):
         out = open("mapaloco.map",'w')
-        my_map = open(sys.argv[2], "rb")
+        my_map = open(mapa, "rb")
         my_map.readline()
         my_map.read(7)
         line_num = int(my_map.readline())
