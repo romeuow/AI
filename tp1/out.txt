@@ -1,0 +1,510 @@
+
+======================================================================
+
+Teste 0
+(58,138)   ->    (10,172)
+
+
+UCS
+<58,138,0>
+failure: goal or state closed
+0
+
+
+A*
+<58,138,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 1
+(8,60)   ->    (110,200)
+
+
+UCS
+<8,60,0>
+failure: goal or state closed
+0
+
+
+A*
+<8,60,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 2
+(113,253)   ->    (204,211)
+
+
+UCS
+<113,253,0>
+failure: goal or state closed
+0
+
+
+A*
+<113,253,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 3
+(110,42)   ->    (182,224)
+
+
+UCS
+<110,42,0>
+failure: goal or state closed
+0
+
+
+A*
+<110,42,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 4
+(222,31)   ->    (225,181)
+
+
+UCS
+<222,31,0>
+failure: goal or state closed
+0
+
+
+A*
+<222,31,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 5
+(234,149)   ->    (170,88)
+
+
+UCS
+<234,149,0>
+failure: goal or state closed
+0
+
+
+A*
+<234,149,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 6
+(199,41)   ->    (171,205)
+
+
+UCS
+<199,41,0>
+failure: goal or state closed
+0
+
+
+A*
+<199,41,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 7
+(185,14)   ->    (190,236)
+
+
+UCS
+<185,14,0>
+<190,236,292.0> 
+32070
+
+
+A*
+<185,14,0>
+<190,236,292.0> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 8
+(95,224)   ->    (18,167)
+
+
+UCS
+<95,224,0>
+failure: goal or state closed
+0
+
+
+A*
+<95,224,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 9
+(255,253)   ->    (187,212)
+
+
+UCS
+<255,253,0>
+failure: goal or state closed
+0
+
+
+A*
+<255,253,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 10
+(239,243)   ->    (56,120)
+
+
+UCS
+<239,243,0>
+<56,120,256.0> 
+23358
+
+
+A*
+<239,243,0>
+<56,120,256.0> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 11
+(243,168)   ->    (239,6)
+
+
+UCS
+<243,168,0>
+<239,6,250.0> 
+22454
+
+
+A*
+<243,168,0>
+<239,6,250.0> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 12
+(56,209)   ->    (73,80)
+
+
+UCS
+<56,209,0>
+failure: goal or state closed
+0
+
+
+A*
+<56,209,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 13
+(12,29)   ->    (3,170)
+
+
+UCS
+<12,29,0>
+failure: goal or state closed
+0
+
+
+A*
+<12,29,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 14
+(253,219)   ->    (180,25)
+
+
+UCS
+<253,219,0>
+failure: goal or state closed
+0
+
+
+A*
+<253,219,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 15
+(153,164)   ->    (26,96)
+
+
+UCS
+<153,164,0>
+failure: goal or state closed
+0
+
+
+A*
+<153,164,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 16
+(90,12)   ->    (92,139)
+
+
+UCS
+<90,12,0>
+failure: goal or state closed
+0
+
+
+A*
+<90,12,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 17
+(29,116)   ->    (102,42)
+
+
+UCS
+<29,116,0>
+failure: goal or state closed
+0
+
+
+A*
+<29,116,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 18
+(238,88)   ->    (97,165)
+
+
+UCS
+<238,88,0>
+<97,165,180.5> 
+20090
+
+
+A*
+<238,88,0>
+<97,165,180.5> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 19
+(106,9)   ->    (11,84)
+
+
+UCS
+<106,9,0>
+failure: goal or state closed
+0
+
+
+A*
+<106,9,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 20
+(251,48)   ->    (64,139)
+
+
+UCS
+<251,48,0>
+failure: goal or state closed
+0
+
+
+A*
+<251,48,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 21
+(115,250)   ->    (12,98)
+
+
+UCS
+<115,250,0>
+failure: goal or state closed
+0
+
+
+A*
+<115,250,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 22
+(93,244)   ->    (42,242)
+
+
+UCS
+<93,244,0>
+failure: goal or state closed
+0
+
+
+A*
+<93,244,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 23
+(50,65)   ->    (25,255)
+
+
+UCS
+<50,65,0>
+failure: goal or state closed
+0
+
+
+A*
+<50,65,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 24
+(30,230)   ->    (91,160)
+
+
+UCS
+<30,230,0>
+<91,160,156.5> 
+6830
+
+
+A*
+<30,230,0>
+<91,160,156.5> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 25
+(199,121)   ->    (59,9)
+
+
+UCS
+<199,121,0>
+failure: goal or state closed
+0
+
+
+A*
+<199,121,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 26
+(23,200)   ->    (221,120)
+
+
+UCS
+<23,200,0>
+<221,120,42.5> 
+15442
+
+
+A*
+<23,200,0>
+<221,120,43.0> 
+str(nodes_expanded)
+
+======================================================================
+
+Teste 27
+(39,176)   ->    (137,139)
+
+
+UCS
+<39,176,0>
+failure: goal or state closed
+0
+
+
+A*
+<39,176,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 28
+(155,23)   ->    (32,147)
+
+
+UCS
+<155,23,0>
+failure: goal or state closed
+0
+
+
+A*
+<155,23,0>
+failure: goal or state closed
+str(nodes_expanded)
+
+======================================================================
+
+Teste 29
+(143,107)   ->    (215,238)
+
+
+UCS
+<143,107,0>
+failure: goal or state closed
+0
+
+
+A*
+<143,107,0>
+failure: goal or state closed
+str(nodes_expanded)
