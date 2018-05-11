@@ -20,10 +20,10 @@ class MainClass:
 		try:
 			if(problem.map_problem[problem.initial_state.position] == '@' or problem.map_problem[problem.goal_state.position] == '@'):
 				# print('failure: goal or state closed')
-				return 'failure: goal or state closed', 0 , time.time()-start_time, None
+				return None, 0 , time.time()-start_time, None
 		except KeyError:
 			# print('failure')
-			return 'failure', 0, time.time()-start_time, None
+			return None, 0, time.time()-start_time, None
 		
 		search = SearchClass()
 		if algorithm == 'ids':
@@ -34,7 +34,7 @@ class MainClass:
 		else:
 			result, nodes_expanded, explored = search.search(problem, math.inf)
 			total_time = time.time()-start_time
-			print(result)
+			# print(result, nodes_expanded)
 			return result, nodes_expanded, total_time, explored
 
 			
