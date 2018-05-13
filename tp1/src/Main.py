@@ -13,7 +13,7 @@ class MainClass:
 		pass
 
 	def __problem__(self, algorithm, mapa, initial_x, initial_y, goal_x, goal_y):
-		return ProblemClass(BuildMapClass.build_map(mapa), NodeClass(initial_x, initial_y, 0, 0, None, algorithm, 0), NodeClass(goal_x, goal_y, 0, 0, None, algorithm, math.inf))
+		return ProblemClass(BuildMapClass.build_map(mapa), NodeClass(initial_x, initial_y,  0, None, algorithm), NodeClass(goal_x, goal_y, 0, None, algorithm))
     
 	def run(self, algorithm, mapa, initial_x, initial_y, goal_x, goal_y):
 		start_time = time.time()
@@ -23,12 +23,12 @@ class MainClass:
 			if(problem.map_problem[problem.initial_state.position] == '@' or problem.map_problem[problem.goal_state.position] == '@'):
 				print('failure: goal or state closed')
 				problem.goal_state.failure = True
-				problem.goal_state.cost = math.inf
+				problem.goal_state.function = math.inf
 				return problem.goal_state, 0 , time.time()-start_time, None
 		except KeyError:
 			print('failure: goal or state closed')
 			problem.goal_state.failure = True
-			problem.goal_state.cost = math.inf
+			problem.goal_state.function = math.inf
 			return problem.goal_state, 0, time.time()-start_time, None
 		
 		search = SearchClass()

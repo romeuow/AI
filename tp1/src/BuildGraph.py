@@ -17,26 +17,26 @@ class BuildGraphClass:
                     hash_map[(i,j)] == ('.' or '@')
                     if ((i,j) != node.position) and ((i,j) not in explored):
                         
-                        g = c.g(node, i, j)
-                        current = NodeClass(i, j, g , node.depth + 1, node, node.type, 0)
+                        current = NodeClass(i, j, node.depth + 1, node, node.type)
 
-                        if node.type == 'ids':
-                            valid_nodes_aux.update({(i,j): current})
-                        elif node.type == 'ucs':
-                            current.cost = g
-                            valid_nodes_aux.update({(i,j): current})
+                        if node.type == 'ucs':
+                            current.g = c.g(node, i, j)
+                            current.function = current.g
                         elif node.type == 'bfs':
-                            h = c.manhattan(current, goal)
-                            current.cost = h
-                            valid_nodes_aux.update({(i,j): current})
+                            current.g = c.g(node, i, j)
+                            current.h = c.manhattan(current, goal)
+                            current.function = current.h
                         elif node.type == 'astar_manhattan':
-                            h = c.manhattan(current, goal)
-                            current.cost = g + h
-                            valid_nodes_aux.update({(i,j): current})                            
+                            current.g = c.g(node, i, j)
+                            current.h = c.manhattan(current, goal)
+                            current.function = current.g + current.h
                         elif node.type == 'astar_octile':
-                            h = c.octile(current, goal)                     	
-                            current.cost = g + h
-                            valid_nodes_aux.update({(i,j): current})
+                            current.g = c.g(node, i, j)
+                            current.h = c.octile(current, goal)
+                            current.function = current.g + current.h
+                            
+                        valid_nodes_aux.update({(i,j): current})
+
                 except KeyError:
                     pass
                 except IndexError:

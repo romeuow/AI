@@ -11,9 +11,6 @@ class TestsClass:
 	# path = "/home/romeu.oliveira/Documents/repos/AI/tp1/"
 	path = "C:\\Users\\romeu\\Documents\\repos\\AI\\tp1\\"
 
-	
-
-
 	out = open(path + 	"out.txt", "w")
 	
 	out.seek(0)
@@ -42,7 +39,7 @@ class TestsClass:
 	sum_distance_solution_astar_o = .0
 
 
-	for i in range(50):
+	for i in range(10):
 
 		out.writelines("\n======================================================================\n")
 		out.writelines("\nTeste " +  str(i))
@@ -65,18 +62,18 @@ class TestsClass:
 			valid_experiments += 1
 			sum_time_ucs += total_time
 			sum_nodes_expanded_ucs += nodes_expanded
-			solution = result.sum_cost
+			solution = result.function
 			# print(result, total_time, nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'ro', markersize=3.5, label='UCS algorithm')
 
-		# result, nodes_expanded, total_time, explored = m.run('bfs', path + "map1.map", start_x, start_y, goal_x, goal_y)
+		result, nodes_expanded, total_time, explored = MainClass().run('bfs', path + "map1.map", start_x, start_y, goal_x, goal_y)
 
 		if result is not None and not result.failure:
 			out.write("\n\nBFS\n<" + str(start_x) + "," + str(start_y) + ",0>\n")
 			out.write(str(result) + "\n" + str(nodes_expanded) + "\n")
 			sum_time_bfs += total_time
 			sum_nodes_expanded_bfs += nodes_expanded
-			sum_distance_solution_bfs += result.sum_cost - solution
+			sum_distance_solution_bfs += result.g - solution
 			# print(result, total_time, nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'go', markersize=3.5, label='BFS algorithm')
 
@@ -87,7 +84,7 @@ class TestsClass:
 			out.write(str(result) + "\n" + str(nodes_expanded) + "\n")
 			sum_time_astar_o += total_time
 			sum_nodes_expanded_astar_o += nodes_expanded
-			sum_distance_solution_astar_o += result.sum_cost - solution
+			sum_distance_solution_astar_o += result.function - solution
 			# print(result, total_time, nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'bo', markersize=3.5, label='A*(octile) algorithm')
 
