@@ -41,7 +41,7 @@ class TestsClass:
 	sum_distance_solution_astar_o = .0
 
 
-	for i in range(150):
+	for i in range(30):
 
 		out.writelines("\n======================================================================\n")
 		out.writelines("\nTeste " +  str(i))
@@ -61,7 +61,6 @@ class TestsClass:
 			sum_time_ids += total_time
 			sum_nodes_expanded_ids += nodes_expanded
 			sum_distance_solution_ids += result.g - solution
-			# print(str(result), nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'mo', markersize=3.5, label='IDS algorithm')
 
 		result, nodes_expanded, total_time, explored = MainClass().run('ucs', path + mapa, start_x, start_y, goal_x, goal_y)
@@ -74,7 +73,6 @@ class TestsClass:
 			sum_time_ucs += total_time
 			sum_nodes_expanded_ucs += nodes_expanded
 			solution = result.function
-			# print(str(result), nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'ro', markersize=3.5, label='UCS algorithm')
 		else:
 			continue
@@ -87,7 +85,6 @@ class TestsClass:
 			sum_time_bfs += total_time
 			sum_nodes_expanded_bfs += nodes_expanded
 			sum_distance_solution_bfs += result.g - solution
-			# print(str(result), nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'go', markersize=3.5, label='BFS algorithm')
 
 		result, nodes_expanded, total_time, explored = MainClass().run('astar_manhattan', path + mapa, start_x, start_y, goal_x, goal_y)
@@ -98,7 +95,6 @@ class TestsClass:
 			sum_time_astar_m += total_time
 			sum_nodes_expanded_astar_m += nodes_expanded
 			sum_distance_solution_astar_m += result.function - solution
-			# print(str(result), nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'co', markersize=3.5, label='A*(manhattan) algorithm')
 
 		result, nodes_expanded, total_time, explored = MainClass().run('astar_octile', path + mapa, start_x, start_y, goal_x, goal_y)
@@ -109,7 +105,6 @@ class TestsClass:
 			sum_time_astar_o += total_time
 			sum_nodes_expanded_astar_o += nodes_expanded
 			sum_distance_solution_astar_o += result.function - solution
-			# print(str(result), nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'bo', markersize=3.5, label='A*(octile) algorithm')
 
 	out.write("================================Result=============================")

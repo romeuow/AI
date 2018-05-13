@@ -16,19 +16,29 @@ class MainClass:
 		return ProblemClass(BuildMapClass.build_map(mapa), NodeClass(initial_x, initial_y,  0, None, algorithm), NodeClass(goal_x, goal_y, 0, None, algorithm))
     
 	def run(self, algorithm, mapa, initial_x, initial_y, goal_x, goal_y):
+		out = open('out_tp1.txt', 'w')
+		out.seek(0)
+		out.truncate()
+
 		start_time = time.time()
 		problem = self.__problem__(algorithm, mapa, initial_x, initial_y, goal_x, goal_y)
 		
 		try:
 			if(problem.map_problem[problem.initial_state.position] == '@' or problem.map_problem[problem.goal_state.position] == '@'):
-				# print('failure: goal or state closed')
 				problem.goal_state.failure = True
-				problem.goal_state.function = math.inf
+				problem.goal_state.g = math.inf
+				print("Initial or Goal state inaccessible")
+				print("Output: ", out.name)
+				out.write(str(problem.initial_state) + '\n' + str(problem.goal_state) + "\n\n")
+				out.close()
 				return problem.goal_state, 0 , time.time()-start_time, None
 		except KeyError:
-			# print('failure: goal or state closed')
 			problem.goal_state.failure = True
-			problem.goal_state.function = math.inf
+			problem.goal_state.g = math.inf
+			print("Initial or Goal state inaccessible")
+			print("Output: ", out.name)
+			out.write(str(problem.initial_state) + '\n' + str(problem.goal_state) + "\n\n")
+			out.close()
 			return problem.goal_state, 0, time.time()-start_time, None
 		
 		search = SearchClass()
@@ -36,14 +46,19 @@ class MainClass:
 			limit = 0
 			result = None
 			while result is None:
-				# print("\nIteração: ", depth)
 				result, nodes_expanded, path = search.search(problem, limit)
 				limit += 1
 			total_time = time.time()-start_time
+			print("Output: ", out.name)
+			out.write(str(problem.initial_state) + '\n' + str(result) + "\n\n" + str(path))
+			out.close()
 			return result, nodes_expanded, total_time, path
 		else:
 			result, nodes_expanded, path = search.search(problem)
 			total_time = time.time()-start_time
+			print("Output: ", out.name)
+			out.write(str(problem.initial_state) + '\n' + str(result) + "\n\n" + str(path))
+			out.close()
 			return result, nodes_expanded, total_time, path
 
 if __name__ == '__main__':
