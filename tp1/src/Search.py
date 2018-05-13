@@ -31,6 +31,7 @@ class SearchClass:
 
             if node.position == problem.goal_state.position:
                 # print("Solução! ", node.position == problem.goal_state.position)
+                self.clear(frontier, explored)
                 return node, nodes_expanded, path
                 
             # print("Chegou no fundo??  ", limit == node.depth)
@@ -46,20 +47,21 @@ class SearchClass:
             for children in childs:
                 # if(node.type == 'astar_octile'):
                 #     print("filho")
+
                 if not frontier.contains(children.position):
-                    # if node.type == 'astar_octile':
-                    #         print("filho NAO ta na fronteira")
                     frontier.add_item(children, children.function)
+                    # if node.type == 'astar_octile':
+                    #     print(children.position, " NAO ta na fronteira")
+                    # print(frontier)
                 else:
                     if limit != math.inf:
                         continue
                     else:
                         item = frontier.entry_finder[children.position][2]
                         # if(node.type == 'astar_octile'):
-                        #     print(frontier) 
-                        #     print(item, nodes_expanded)
+                            # print("\n\n", item, " ta na fronteira.\nFronteira: ", frontier.entry_finder, "\nNós expandidos: ", nodes_expanded) 
                         # print(item.cost, children.cost)
-                        if item.function >= children.function:
+                        if item.function > children.function:
                             # print("Removendo ", item, " com função =", item.cost)
                             # print("Adicionando ", children, " com função =", children.cost)
                             frontier.add_item(children, children.function)
@@ -72,9 +74,7 @@ class SearchClass:
         
         # print("Acabou a fronteira")
 
-        frontier.clear()
-        explored.clear()
-        path.clear()
+        self.clear(frontier, explored)
 
         if cutoff_ocurred:
             return None, nodes_expanded, path
@@ -82,3 +82,7 @@ class SearchClass:
             problem.goal_state.failure = True
             problem.goal_state.function = math.inf
             return problem.goal_state, nodes_expanded, path
+
+    def clear(self, frontier, explored):
+        frontier.clear()
+        explored.clear()

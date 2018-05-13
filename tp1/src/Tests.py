@@ -11,7 +11,7 @@ class TestsClass:
 	# path = "/home/romeu.oliveira/Documents/repos/AI/tp1/"
 	path = "C:\\Users\\romeu\\Documents\\repos\\AI\\tp1\\"
 
-	out = open(path + 	"out.txt", "w")
+	out = open(path + "out.txt", "w")
 	
 	out.seek(0)
 	out.truncate()
@@ -39,7 +39,7 @@ class TestsClass:
 	sum_distance_solution_astar_o = .0
 
 
-	for i in range(10):
+	for i in range(60):
 
 		out.writelines("\n======================================================================\n")
 		out.writelines("\nTeste " +  str(i))
@@ -65,6 +65,8 @@ class TestsClass:
 			solution = result.function
 			# print(result, total_time, nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'ro', markersize=3.5, label='UCS algorithm')
+		else:
+			continue
 
 		result, nodes_expanded, total_time, explored = MainClass().run('bfs', path + "map1.map", start_x, start_y, goal_x, goal_y)
 
