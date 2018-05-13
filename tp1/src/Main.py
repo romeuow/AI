@@ -21,12 +21,12 @@ class MainClass:
 		
 		try:
 			if(problem.map_problem[problem.initial_state.position] == '@' or problem.map_problem[problem.goal_state.position] == '@'):
-				print('failure: goal or state closed')
+				# print('failure: goal or state closed')
 				problem.goal_state.failure = True
 				problem.goal_state.function = math.inf
 				return problem.goal_state, 0 , time.time()-start_time, None
 		except KeyError:
-			print('failure: goal or state closed')
+			# print('failure: goal or state closed')
 			problem.goal_state.failure = True
 			problem.goal_state.function = math.inf
 			return problem.goal_state, 0, time.time()-start_time, None
@@ -44,7 +44,6 @@ class MainClass:
 		else:
 			result, nodes_expanded, path = search.search(problem)
 			total_time = time.time()-start_time
-			print(str(result), nodes_expanded)
 			return result, nodes_expanded, total_time, path
 
 if __name__ == '__main__':

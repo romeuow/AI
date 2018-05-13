@@ -16,7 +16,7 @@ class NodeClass:
     	return str(self)
 
     def __str__(self):
-        if self.type == 'bfs':
+        if self.type == 'bfs' or self.type == 'ids':
             return "<" + str(self.x) + "," + str(self.y) + ","+ str(self.g) + "> "    
         return "<" + str(self.x) + "," + str(self.y) + ","+ str(self.function) + "> "
    		# return "\n\nPosition: " + str(self.position) + "\nSum cost: " + str(self.sum_cost) + "\nParent: " + str(self.parent.position) + "\nDepth: " + str(self.depth) + "\nCost: " + str(self.cost)

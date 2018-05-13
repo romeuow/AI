@@ -18,20 +18,17 @@ class BuildGraphClass:
                     if ((i,j) != node.position) and ((i,j) not in explored):
                         
                         current = NodeClass(i, j, node.depth + 1, node, node.type)
+                        current.g = c.g(node, i, j)
 
                         if node.type == 'ucs':
-                            current.g = c.g(node, i, j)
                             current.function = current.g
                         elif node.type == 'bfs':
-                            current.g = c.g(node, i, j)
                             current.h = c.manhattan(current, goal)
                             current.function = current.h
                         elif node.type == 'astar_manhattan':
-                            current.g = c.g(node, i, j)
                             current.h = c.manhattan(current, goal)
                             current.function = current.g + current.h
                         elif node.type == 'astar_octile':
-                            current.g = c.g(node, i, j)
                             current.h = c.octile(current, goal)
                             current.function = current.g + current.h
                             
