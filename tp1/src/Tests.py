@@ -25,17 +25,17 @@ class TestsClass:
 	# sum_time_ids = .0
 	sum_time_ucs = .0
 	sum_time_bfs = .0
-	# sum_time_astar_m = .0
+	sum_time_astar_m = .0
 	sum_time_astar_o = .0
 	# sum_nodes_expanded_ids = .0
 	sum_nodes_expanded_ucs = .0
 	sum_nodes_expanded_bfs = .0
-	# sum_nodes_expanded_astar_m = .0
+	sum_nodes_expanded_astar_m = .0
 	sum_nodes_expanded_astar_o = .0
 	solution = .0
 	# sum_distance_solution_ids = .0
 	sum_distance_solution_bfs = .0
-	# sum_distance_solution_astar_m = .0
+	sum_distance_solution_astar_m = .0
 	sum_distance_solution_astar_o = .0
 
 
@@ -79,6 +79,17 @@ class TestsClass:
 			# print(result, total_time, nodes_expanded)
 			plt.plot(total_time, nodes_expanded, 'go', markersize=3.5, label='BFS algorithm')
 
+		result, nodes_expanded, total_time, explored = MainClass().run('astar_manhattan', path + "map1.map", start_x, start_y, goal_x, goal_y)
+
+		if result is not None and not result.failure:
+			out.write("\n\nA* manhattan\n<" + str(start_x) + "," + str(start_y) + ",0>\n")
+			out.write(str(result) + "\n" + str(nodes_expanded) + "\n")
+			sum_time_astar_m += total_time
+			sum_nodes_expanded_astar_m += nodes_expanded
+			sum_distance_solution_astar_m += result.function - solution
+			# print(result, total_time, nodes_expanded)
+			plt.plot(total_time, nodes_expanded, 'co', markersize=3.5, label='A*(manhattan) algorithm')
+
 		result, nodes_expanded, total_time, explored = MainClass().run('astar_octile', path + "map1.map", start_x, start_y, goal_x, goal_y)
 
 		if result is not None and not result.failure:
@@ -93,12 +104,15 @@ class TestsClass:
 	out.write("================================Result=============================")
 	out.write("\n\nDelta time ucs: " + str(sum_time_ucs/valid_experiments))
 	out.write("\nDelta time bfs: " + str(sum_time_bfs/valid_experiments))
+	out.write("\nDelta time astar_m: " + str(sum_time_astar_m/valid_experiments))
 	out.write("\nDelta time astar_o: " + str(sum_time_astar_o/valid_experiments))
 	out.write("\n\nDelta nodes_expanded ucs: " + str(sum_nodes_expanded_ucs/valid_experiments))
 	out.write("\nDelta nodes_expanded bfs: " + str(sum_nodes_expanded_bfs/valid_experiments))
+	out.write("\nDelta nodes_expanded astar_m: " + str(sum_nodes_expanded_astar_m/valid_experiments))
 	out.write("\nDelta nodes_expanded astar_o: " + str(sum_nodes_expanded_astar_o/valid_experiments))
 	out.write("\n\nDelta distance_solution_ucs: " + str(solution - solution))
 	out.write("\nDelta distance_solution_bfs: " + str(sum_distance_solution_bfs/valid_experiments))
+	out.write("\nDelta distance_solution_astar_m: " + str(sum_distance_solution_astar_m/valid_experiments))
 	out.write("\nDelta distance_solution_astar_o: " + str(sum_distance_solution_astar_o/valid_experiments))
 
 	handles, labels = plt.gca().get_legend_handles_labels()

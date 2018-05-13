@@ -51,5 +51,5 @@ if __name__ == '__main__':
 	if len(sys.argv) == 7:
 		MainClass().run(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
 	else:
-		print("Modo Teste / Quantidade incorreta de parametros.")
+		print("Quantidade incorreta de parametros.")
 		
