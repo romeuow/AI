@@ -1,6 +1,6 @@
 class NodeClass:
 
-    def __init__(self, i, j, sum_cost, depth, parent, algorithm, cost):
+    def __init__(self, i, j, sum_cost, depth, parent, algorithm, cost, failure = False):
         self.x = int(i)
         self.y = int(j)
         self.position = (int(i), int(j))
@@ -9,6 +9,7 @@ class NodeClass:
         self.depth = int(depth)
         self.type = algorithm
         self.cost = cost
+        self.failure = failure
 
     def __repr__(self):
     	return str(self.position)
@@ -20,3 +21,4 @@ class NodeClass:
     
     def __eq__(self, other):
         return self.position == other.position
+

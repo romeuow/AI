@@ -40,4 +40,9 @@ class QueuePriorityClass:
 	def __repr__(self):
 		return str(self.heap[0][2])
 
+	def clear(self):
+		self.heap.clear()
+		self.entry_finder.clear()
+
+
 			

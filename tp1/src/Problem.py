@@ -9,7 +9,7 @@ class ProblemClass:
     	return "ProblemClass()"
 
     def __str__(self):
-    	return ("Initial State = " + str(self.initial_state) + "\n\nGoal state = " + str(self.goal_state))
+    	return ("Initial State = " + str(self.initial_state) + "Goal state = " + str(self.goal_state))
 
     def __eq__(self, other):
     	return self.hash == other.hash
