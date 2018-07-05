@@ -1,13 +1,14 @@
 from MDP import *
 import random
 import operator as op
+import numpy as np
 
 class QLearningClass:
 
 	def run(self, grid, terminals, alpha, gamma, N):
 
 		mdp = MDPClass(terminals)
-		gridMDP = GridMDPClass(grid, terminals)
+		gridMDP = GridMDPClass(grid)
 		for x in range(gridMDP.rows):
 			for y in range(gridMDP.cols):
 				if grid[x][y] is not None:
@@ -22,8 +23,9 @@ class QLearningClass:
 		# Inicializa Q com 0 para cada tupla (estado_x, estado_y, ação)
 		Q = dict([(s_a, 0) for s_a in mdp.state_actions])
 
-		episilon = 0.005
-		# episode = 0
+		# reward = 0
+		# iteraction = 0
+		episilon = 0.0009
 
 		current_state = random.sample(mdp.states,1)[0]
 		# print("Episode: ", episode)
@@ -31,7 +33,7 @@ class QLearningClass:
 		for i in range(N):
 			while current_state in mdp.terminals:
 				# Final de um episodio		
-				# episode += 1
+				# iteraction = 0
 				# print(alpha, episilon, i)
 
 				# Decrementa alpha (diminuindo a taxa de aprendizado)
@@ -42,14 +44,29 @@ class QLearningClass:
 
 				# Começa novo episodio
 				# print("Episode: ", episode)
+
+				# reward = 0
 				current_state = random.sample(mdp.states,1)[0]
 			
-			action = random.choice(list(mdp.actions(current_state).keys()))
+			
+			subdict = {k:Q[k] for k in (current_state + (a,) for a in mdp.list_actions.values()) if k in Q}
+			# print(subdict)
+			maxi_key = max(subdict.items(), key=op.itemgetter(1))[0]
+
+			actions = list(mdp.actions(current_state).values())
+			actions.append(maxi_key[2])
+
+			action = np.random.choice(actions, 1, p=[(alpha/4), (alpha/4), (alpha/4), (alpha/4), (1-alpha)])
+			# print(maxi_key[2], action[0], 1-alpha)
+			action = list(mdp.list_actions.keys())[list(mdp.list_actions.values()).index(action)]
+			# action = random.choice(list(mdp.actions(current_state).keys()))
 			next_state = mdp.go(current_state,action)
 
 			# Função Q-Learning 
 			Q[current_state + (mdp.list_actions[action],)] = (1-alpha)*Q[current_state + (mdp.list_actions[action],)] + alpha*(mdp.R(next_state) + gamma*max([Q[current_state + (a,)] for a in list(mdp.list_actions.values())]))
 			current_state = next_state
+
+			# iteraction	 += 1
 
 		#policy
 		for state in mdp.states:

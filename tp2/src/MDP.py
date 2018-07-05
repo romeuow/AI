@@ -8,6 +8,7 @@ class MDPClass:
 		self.state_actions = []
 		self.policy = {}
 
+
 	def R(self, state):
 		return self.reward[state]
 
@@ -25,7 +26,7 @@ class MDPClass:
 			return state
 
 class GridMDPClass:
-	def __init__(self, grid, terminals):
+	def __init__(self, grid):
 		self.grid = grid
 		self.rows = len(grid)
 		self.cols = len(grid[0])
