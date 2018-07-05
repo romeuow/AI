@@ -20,9 +20,9 @@ class QLearningClass:
 
 		Q = dict([(s_a, 0) for s_a in mdp.state_actions])
 
-		# total_reward = 0
+		total_reward = 0
 		episode = 0
-		episilon = 0.009
+		episilon = 0.0001
 		policy = []
 
 
@@ -30,12 +30,11 @@ class QLearningClass:
 		# print("Episode: ", episode)
 		
 		for i in range(N):
-			print(current_state)
 		
 			while current_state in mdp.terminals:
 				# print("Total_reward: ", total_reward)
 				episode += 1
-				# total_reward = 0
+				total_reward = 0
 				alpha -= episilon
 				# episilon *= 1/i+1
 				# print("Episode: ", episode)
@@ -47,7 +46,7 @@ class QLearningClass:
 
 			next_state = mdp.go(current_state,action)
 			# print("Next state: ", next_state)
-			# total_reward += mdp.R(next_state)
+			total_reward += mdp.R(next_state)
 
 		# for a in list(mdp.list_actions.values()):
 		# 	print(Q[current_state + (a,)])
@@ -71,7 +70,7 @@ class QLearningClass:
 			if maxi != 0 and maxi != mini:
 				policy.append(list(Q.keys())[list(Q.values()).index(maxi)])
 			else:
-				policy.append(state + (None,))
+				policy.append(state + ('acima',))
 
 		# print(policy)
 
