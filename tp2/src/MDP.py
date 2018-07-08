@@ -8,7 +8,6 @@ class MDPClass:
 		self.state_actions = []
 		self.policy = {}
 
-
 	def R(self, state):
 		return self.reward[state]
 
